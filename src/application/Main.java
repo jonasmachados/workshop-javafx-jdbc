@@ -18,7 +18,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-   
+    private static Scene mainScene; //Atributo privado que esta recebendo a Scena
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -28,12 +29,13 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainViewShop.fxml"));
             ScrollPane scrollPane = loader.load();
-            
+
             //Ajusta janela  do ScrollPane
             scrollPane.setFitToHeight(true); //Ajusta Altura
             scrollPane.setFitToWidth(true);  //Ajustar Largura
-            
-            Scene mainScene = new Scene(scrollPane);
+
+            //Cria scena
+            mainScene = new Scene(scrollPane);
             primaryStage.setScene(mainScene);
             primaryStage.setTitle("Sample JavaFX application"); //Titulo para o palco
             primaryStage.show(); //mostrando o palco
@@ -42,20 +44,9 @@ public class Main extends Application {
         }
     }
 
+    //Metodo que pega referencia da Scena
+    public static Scene getMainScene() {
+        return mainScene;
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
