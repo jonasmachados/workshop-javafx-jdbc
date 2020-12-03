@@ -37,7 +37,7 @@ public class MainViewShopController implements Initializable {
     //Metodo para tratar os eventos
     @FXML
     public void onMenuItemDepartmentAction() {
-        System.out.println("onMenuItemDepartmentAction");
+        loadView("DepartmentList.fxml");
     }
 
     //Metodo para tratar os eventos
@@ -50,8 +50,8 @@ public class MainViewShopController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    //Criando um FXMLLoader para carregar a tela
-    private synchronized void loadView(String absoluteName) {
+    //Criando um FXMLLoader para carregar a tela,e sincronizandod evido as threads
+    private synchronized void loadView(String absoluteName) { 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVBox = loader.load();
