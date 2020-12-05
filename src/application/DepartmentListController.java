@@ -99,8 +99,7 @@ public class DepartmentListController implements Initializable{
             dialogStage.setScene(new Scene(pane));
             dialogStage.setResizable(false); //Resizable: Diz se janela pode ser redimencionada
             dialogStage.initOwner(parentStage);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            //dialogStage.showingProperty();//trava a janela
+            dialogStage.initModality(Modality.WINDOW_MODAL);//Trava a janela
             dialogStage.showAndWait();
         } catch (IOException e){
             Alerts.showAlert("IO Exception", "Error loading view ", e.getMessage(), AlertType.ERROR);
