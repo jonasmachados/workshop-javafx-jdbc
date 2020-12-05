@@ -1,6 +1,6 @@
 package application;
 
-import gui.util.Alerts;
+import util.Alerts;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
