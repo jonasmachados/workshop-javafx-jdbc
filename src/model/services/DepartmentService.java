@@ -1,9 +1,11 @@
 
 package model.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import model.entilies.Department;
+import model.dao.DaoFactory;
+import model.dao.DepartmentDao;
+import model.entities.Department;
+
 
 /**
  *
@@ -11,14 +13,42 @@ import model.entilies.Department;
  */
 public class DepartmentService {
     
-    //Colecao
+    private DepartmentDao dao = DaoFactory.createDepartmentDao();
+    
     public List<Department> findyAll(){
-        List<Department> list = new ArrayList<>();
-        list.add(new Department(1, "Books"));
-        list.add(new Department(2, "Computer"));
-        list.add(new Department(3, "Eletronics"));
-        return(list);
+        return dao.findAll();
     }
 }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
