@@ -13,4 +13,13 @@ public class Utils {
         return (Stage) ((Node) event.getSource()).getScene().getWindow();
         
     }  
+    
+    //Metodo para converter o valor da caixa de texto para Inteiro
+    public static Integer tryParseToInt(String str){
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 }

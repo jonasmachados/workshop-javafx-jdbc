@@ -15,8 +15,19 @@ public class DepartmentService {
     
     private DepartmentDao dao = DaoFactory.createDepartmentDao();
     
+    //Lista todos os objetos Department
     public List<Department> findyAll(){
         return dao.findAll();
+    }
+    
+    //Metodo que vai Inserir ou atualizar os dados do Department
+    public void saveOrUpdate(Department obj){
+        if(obj.getId() == null){
+            dao.insert(obj);
+        }
+        else{
+            dao.update(obj);
+        }
     }
 }
     
