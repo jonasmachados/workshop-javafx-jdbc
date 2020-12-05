@@ -3,6 +3,7 @@ package application;
 import gui.util.Alerts;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,13 +39,17 @@ public class MainViewShopController implements Initializable {
     //Metodo para tratar os eventos, trantando Botao DEPARTMENT LIST
     @FXML
     public void onMenuItemDepartmentAction() {
-        loadView2("DepartmentList.fxml");
+        //Acao de inicializacao do controler
+        loadView("DepartmentList.fxml", (DepartmentListController controller) -> {
+                controller.setDepartmentService(new DepartmentService());
+                controller.updateTableView();
+        });
     }
 
     //Metodo para tratar os eventos, tratando botao ABOUT
     @FXML
     public void onMenuItemAboutAction() {
-        loadView("About.fxml");
+        loadView("About.fxml", x -> {});
     }
 
     @Override
@@ -52,27 +57,7 @@ public class MainViewShopController implements Initializable {
     }
 
     //Criando um FXMLLoader para carregar a tela,e sincronizandod evido as threads
-    private synchronized void loadView(String absoluteName) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-            VBox newVBox = loader.load();
-
-            Scene mainScene = Main.getMainScene();
-            VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); //GETROOT pega o primeiro elemento da View
-
-            //Manipulacao da tela principalS
-            Node mainMenu = mainVBox.getChildren().get(0); //Creia um node recebe o Vbox
-            mainVBox.getChildren().clear();//Limpa todos os filhos do Main VBox
-            mainVBox.getChildren().add(mainMenu);//Pega os filhos do Main Nebu
-            mainVBox.getChildren().addAll(newVBox.getChildren()); //Adicionando uma colecao < os filhos do Vbox
-        } catch (Exception e) {
-            //Caso ocorra a execao, o sistema ira msotrar uma Janela de alerta com o Erro
-            Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
-        }
-
-    }
- 
-    private synchronized void loadView2(String absoluteName) {
+    private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVBox = loader.load();
@@ -86,14 +71,48 @@ public class MainViewShopController implements Initializable {
             mainVBox.getChildren().add(mainMenu);//Pega os filhos do Main Nebu
             mainVBox.getChildren().addAll(newVBox.getChildren()); //Adicionando uma colecao < os filhos do Vbox
             
-            DepartmentListController controller = loader.getController();
-            controller.setDepartmentService(new DepartmentService()); //Injetando dependencia
-            controller.updateTableView();
+            //Executa a funcao
+            T controller = loader.getController();
+            initializingAction.accept(controller);
         } catch (Exception e) {
             //Caso ocorra a execao, o sistema ira msotrar uma Janela de alerta com o Erro
             Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
         }
 
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
