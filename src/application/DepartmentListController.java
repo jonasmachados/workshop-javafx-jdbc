@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import listeners.DataChangeListener;
 import model.entities.Department;
 import model.services.DepartmentService;
 
@@ -29,7 +30,7 @@ import model.services.DepartmentService;
  *
  * @author Jonas create 03/12/2020
  */
-public class DepartmentListController implements Initializable{
+public class DepartmentListController implements Initializable, DataChangeListener{
 
     @FXML
     private DepartmentService service;
@@ -99,6 +100,7 @@ public class DepartmentListController implements Initializable{
             DepartmentFormController controller = loader.getController();
             controller.setDepartment(obj);
             controller.setDepartmentService(new DepartmentService());
+            controller.subscribeDataChangeListener(this);//Inscrevendo apra receber o metodo onDataChange
             controller.updateFormData(); //Carrea o Department no formulario
             
             Stage dialogStage = new Stage();
@@ -111,5 +113,11 @@ public class DepartmentListController implements Initializable{
         } catch (IOException e){
             Alerts.showAlert("IO Exception", "Error loading view ", e.getMessage(), AlertType.ERROR);
         }
+    }
+
+    //Qaudno dispara o evento, a o UpdateTableVie e chamado
+    @Override
+    public void onDataChanged() {
+        updateTableView();
     }
 }

@@ -2,6 +2,8 @@ package application;
 
 import db.DbException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javax.swing.text.StyleConstants;
+import listeners.DataChangeListener;
 import model.entities.Department;
 import model.services.DepartmentService;
 import util.Alerts;
@@ -25,11 +28,11 @@ import util.Utils;
 public class DepartmentFormController implements Initializable {
 
     //Declarando as variaves, os componentes
-    @FXML
     private Department entity;
 
-    @FXML
-    DepartmentService service;
+    private DepartmentService service;
+
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
     @FXML
     private TextField txtId;
@@ -51,6 +54,11 @@ public class DepartmentFormController implements Initializable {
         this.entity = entity;
     }
 
+    //Metodo que adiciona um novo obejto na lista
+    public void subscribeDataChangeListener(DataChangeListener listener) {
+        dataChangeListeners.add(listener);
+    }
+
     //SET PARA O DEPARTMENT SERVICE
     public void setDepartmentService(DepartmentService service) {
         this.service = service;
@@ -68,9 +76,17 @@ public class DepartmentFormController implements Initializable {
         try {
             entity = getFormData();
             service.saveOrUpdate(entity); //salvandos os dados
+            notifyDataChangeListeners();
             Utils.currentStage(event).close();//Fechando a tela
         } catch (DbException e) {
             Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+        }
+    }
+
+    //Metodo notify / vai emitir o evento dataChange para todos os listeners
+    private void notifyDataChangeListeners() {
+        for (DataChangeListener listener : dataChangeListeners) {
+            listener.onDataChanged();
         }
     }
 
@@ -83,9 +99,10 @@ public class DepartmentFormController implements Initializable {
         return obj;
     }
 
+    //Metodo para tratar o botao cancel
     @FXML
     public void onBtCancelAction(ActionEvent event) {
-            Utils.currentStage(event).close();//Fechando a tela
+        Utils.currentStage(event).close();//Fechando a tela
     }
 
     @Override

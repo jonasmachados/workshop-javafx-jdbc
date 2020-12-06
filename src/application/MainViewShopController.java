@@ -30,7 +30,7 @@ public class MainViewShopController implements Initializable {
     @FXML
     private MenuItem menuItemAbout;
 
-    //Metodo para tratar os eventos
+    //Metodo para tratar o evento Seller
     @FXML
     public void onMenuItemSellerAction() {
         System.out.println("onMenuItemSellerAction");
@@ -65,7 +65,7 @@ public class MainViewShopController implements Initializable {
             Scene mainScene = Main.getMainScene();
             VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); //GETROOT pega o primeiro elemento da View
 
-            //Manipulacao da tela principalS
+            //Manipulacao da tela principal
             Node mainMenu = mainVBox.getChildren().get(0); //Creia um node recebe o Vbox
             mainVBox.getChildren().clear();//Limpa todos os filhos do Main VBox
             mainVBox.getChildren().add(mainMenu);//Pega os filhos do Main Nebu
