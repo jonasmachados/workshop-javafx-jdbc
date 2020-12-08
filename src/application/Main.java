@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Jonas
+ * @author Jonas 07/12/2020 modified
  */
 public class Main extends Application {
 
@@ -19,6 +19,7 @@ public class Main extends Application {
         launch(args);
     }
 
+    //Implementando o metodo start
     @Override
     public void start(Stage primaryStage) {
         try {

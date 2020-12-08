@@ -4,6 +4,7 @@ package listeners;
 /**
  *
  * @author Jonas create 06/12/2020
+ * PADRAO DE PROJETO "OBSERVER"
  */
 
 public interface DataChangeListener {
