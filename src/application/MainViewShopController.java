@@ -14,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import model.services.DepartmentService;
+import model.services.SellerService;
 
 /**
  *
@@ -33,7 +34,10 @@ public class MainViewShopController implements Initializable {
     //Metodo para tratar o evento Seller
     @FXML
     public void onMenuItemSellerAction() {
-        System.out.println("onMenuItemSellerAction");
+        loadView("SellerList.fxml", (SellerListController controller) -> {
+                controller.setSellerService(new SellerService()); //DepartmentService tem metodo que recebe colecao de Department
+                controller.updateTableView(); //Metodo updateView recebe 
+        });
     }
 
     //Metodo para tratar os eventos, trantando Botao DEPARTMENT LIST
