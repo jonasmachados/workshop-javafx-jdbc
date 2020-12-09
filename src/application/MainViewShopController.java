@@ -41,8 +41,8 @@ public class MainViewShopController implements Initializable {
     public void onMenuItemDepartmentAction() {
         //Acao de inicializacao do controler
         loadView("DepartmentList.fxml", (DepartmentListController controller) -> {
-                controller.setDepartmentService(new DepartmentService());
-                controller.updateTableView();
+                controller.setDepartmentService(new DepartmentService()); //DepartmentService tem metodo que recebe colecao de Department
+                controller.updateTableView(); //Metodo updateView recebe 
         });
     }
 
@@ -56,7 +56,7 @@ public class MainViewShopController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    //Criando um FXMLLoader para carregar a tela,e sincronizandod evido as threads
+    //Criando um FXMLLoader para carregar a tela,e sincronizandod evitando as threads
     private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));

@@ -82,7 +82,7 @@ public class DepartmentFormController implements Initializable {
             service.saveOrUpdate(entity); //salvandos os dados
             notifyDataChangeListeners();//Notificando os lsiteners, 
             Utils.currentStage(event).close();//Fechando a tela
-        }catch(ValidationException e){
+        }catch(ValidationException e){ //ValidationException lanca uma excecao se o TextFiled estiver vazioe  voce tentar salvar
             setErrorMessages(e.getErrors());
         } 
         catch (DbException e) {
@@ -97,7 +97,7 @@ public class DepartmentFormController implements Initializable {
         }
     }
 
-    
+    //Metodo que verifica se o textFiled esta vazio
     private Department getFormData() {
         Department obj = new Department();
 

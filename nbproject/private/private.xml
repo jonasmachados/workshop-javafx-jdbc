@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/MainViewShop.fxml</file>
-            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/About.fxml</file>
-            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/DepartmentForm.fxml</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/MainViewShopController.java</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/util/Utils.java</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/DepartmentFormController.java</file>
             <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/Main.java</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/services/DepartmentService.java</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/exceptions/ValidationException.java</file>
             <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/application/DepartmentListController.java</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/util/Constraints.java</file>
+            <file>file:/C:/Users/Jonas/Documents/NetBeansProjects/workshop-javafx-jdbc/src/util/Alerts.java</file>
         </group>
     </open-files>
 </project-private>
