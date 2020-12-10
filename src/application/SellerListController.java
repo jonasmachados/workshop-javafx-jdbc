@@ -73,7 +73,7 @@ public class SellerListController implements Initializable, DataChangeListener {
     public void onBtNewAction(ActionEvent event) {
         Stage parenStage = Utils.currentStage(event);
         Seller obj = new Seller();
-        createDialogForm(obj, "Seller.fxml", parenStage);
+        createDialogForm(obj, "SellerForm.fxml", parenStage);
     }
 
     //SET PARA CLASSE Seller SERVICE
@@ -117,27 +117,27 @@ public class SellerListController implements Initializable, DataChangeListener {
 
     //Metodo da janela de dialogo
     private void createDialogForm(Seller obj, String absoluteName, Stage parentStage) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-//            Pane pane = loader.load();
-//            //instancia um novo stage , criando um novo stage
-//
-//            SellerFormController controller = loader.getController();
-//            controller.Seller(obj);
-//            controller.setSellerService(new SellerService());
-//            controller.subscribeDataChangeListener(this);//Inscrevendo para receber o metodo onDataChange
-//            controller.updateFormData(); //Carrea o Seller no formulario
-//
-//            Stage dialogStage = new Stage();
-//            dialogStage.setTitle("Enter Seller data");
-//            dialogStage.setScene(new Scene(pane));
-//            dialogStage.setResizable(false); //Resizable: Diz se janela pode ser redimencionada
-//            dialogStage.initOwner(parentStage);
-//            dialogStage.initModality(Modality.WINDOW_MODAL);//Trava a janela
-//            dialogStage.showAndWait();
-//        } catch (IOException e) {
-//            Alerts.showAlert("IO Exception", "Error loading view ", e.getMessage(), AlertType.ERROR);
-//        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            Pane pane = loader.load();
+            //instancia um novo stage , criando um novo stage
+
+            SellerFormController controller = loader.getController();
+            controller.setSeller(obj);
+            controller.setSellerService(new SellerService());
+            controller.subscribeDataChangeListener(this);//Inscrevendo para receber o metodo onDataChange
+            controller.updateFormData(); //Carrea o Seller no formulario
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Enter Seller data");
+            dialogStage.setScene(new Scene(pane));
+            dialogStage.setResizable(false); //Resizable: Diz se janela pode ser redimencionada
+            dialogStage.initOwner(parentStage);
+            dialogStage.initModality(Modality.WINDOW_MODAL);//Trava a janela
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Error loading view ", e.getMessage(), AlertType.ERROR);
+        }
     }
 
     //Qaudno dispara o evento, a o UpdateTableVie e chamado
