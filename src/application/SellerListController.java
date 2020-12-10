@@ -4,6 +4,7 @@ import util.Alerts;
 import util.Utils;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -48,6 +49,15 @@ public class SellerListController implements Initializable, DataChangeListener {
     private TableColumn<Seller, String> tableColumnName;
 
     @FXML
+    private TableColumn<Seller, String> tableColumnEmail;
+    
+    @FXML
+    private TableColumn<Seller, Date> tableColumnBirthDate;
+    
+    @FXML
+    private TableColumn<Seller, Double> tableColumnBaseSalary;
+    
+    @FXML
     private TableColumn<Seller, Seller> tableColumnEDIT;
 
     @FXML
@@ -56,7 +66,7 @@ public class SellerListController implements Initializable, DataChangeListener {
     @FXML
     private Button btNew;
 
-    private ObservableList<Seller> obsList;
+    private ObservableList<Seller> obsList; //observal List modelo de projetop que emiti e recebe um evento
 
     //TRATANDO EVENTO DO BOTAO NEW
     @FXML
@@ -82,7 +92,11 @@ public class SellerListController implements Initializable, DataChangeListener {
         //Iniciar o comportamento das colunas
         tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
+        tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");// Metodo formatTbaleDouble vai formata a data da tabela
+        tableColumnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("BaseSalary"));
+        Utils.formatTableColumnDouble(tableColumnBaseSalary, 2);//Formata numero
         //AJUSTANDO A TABLE VIEW AO TAMANHO DA TELA
         Stage stage = (Stage) Main.getMainScene().getWindow();
         tableViewSeller.prefHeightProperty().bind(stage.heightProperty());
