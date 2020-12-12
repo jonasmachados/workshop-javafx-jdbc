@@ -2,8 +2,12 @@ package application;
 
 import db.DbException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -12,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import listeners.DataChangeListener;
@@ -40,9 +45,27 @@ public class SellerFormController implements Initializable {
 
     @FXML
     private TextField txtName;
+    
+    @FXML
+    private TextField txtEmail;
+    
+    @FXML
+    private DatePicker dpBirthDate; //Para utilizar a Data precisa um DatePicker
+    
+    @FXML
+    private TextField txtBaseSalary;
 
     @FXML
     private Label labelErrorName;
+    
+    @FXML
+    private Label labelErrorEmail;
+    
+    @FXML
+    private Label labelErrorBirthdate;
+    
+    @FXML
+    private Label labelErrorBaseSalary;
 
     @FXML
     private Button btSalve;
@@ -129,10 +152,13 @@ public class SellerFormController implements Initializable {
 
     private void initializeNodes() {
         Constraints.setTextFieldInteger(txtId); //So pode ser inteiro
-        Constraints.setTextFieldMaxLength(txtName, 30); //Colocando o limite de caracteres no TXT
+        Constraints.setTextFieldMaxLength(txtName, 70); //Colocando o limite de caracteres no TXT
+        Constraints.setTextFieldDouble(txtBaseSalary);
+        Constraints.setTextFieldMaxLength(txtEmail, 60);//Definindo Tamanho maximo para o Email
+        Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");//Formatando a data com Dateìcker
     }
 
-    //Metodo responsavel para pegar os dados do Seller e popualr a caixa de texto do formulario
+    //Metodo responsavel para pegar os dados do Seller e popular a caixa de texto do formulario
     public void updateFormData() {
         //Testa se Entily esta nulo, o meu seller estiver nulo 
         if (entity == null) {
@@ -140,6 +166,13 @@ public class SellerFormController implements Initializable {
         }
         txtId.setText(String.valueOf(entity.getId())); //Pega o ID digitado
         txtName.setText(entity.getName());//Pega o ID digitado
+        txtEmail.setText(entity.getEmail());//Pega o Email
+        Locale.setDefault(Locale.US);//Locale utilizado para garantir que ele vai colocar o ponto e nao a virgula
+        txtBaseSalary.setText(String.format("%.2f", entity.getBaseSalary()));//Precisa converter Double para String
+        if (entity.getBirthDate() != null) {
+            dpBirthDate.setValue(LocalDate.ofInstant(entity.getBirthDate().toInstant(), ZoneId.systemDefault()));
+        }
+        
     }
 
     //Metodo para prencher a mensagen do erro na textLabel
