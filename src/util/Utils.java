@@ -29,6 +29,15 @@ public class Utils {
             return null;
         }
     }
+    
+        //Metodo para converter o valor da caixa de texto para Inteiro
+    public static Double tryParseToDouble(String  str) {
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 
     //Formatar Table Column Date(Data)
     public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {
