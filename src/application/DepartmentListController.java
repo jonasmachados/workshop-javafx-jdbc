@@ -88,7 +88,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
         tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
     }
 
-    //Metodo responsavel por carregar o servico  ejogar o Department
+    //Metodo responsavel por carregar o servico  e jogar o Department
     //Na observableList
     public void updateTableView() {
         if (service == null) {
@@ -112,7 +112,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
             controller.setDepartment(obj);
             controller.setDepartmentService(new DepartmentService());
             controller.subscribeDataChangeListener(this);//Inscrevendo para receber o metodo onDataChange
-            controller.updateFormData(); //Carrea o Department no formulario
+            controller.updateFormData(); //popula o ALuno no formulario
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Enter Department data");

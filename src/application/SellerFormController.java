@@ -243,7 +243,8 @@ public class SellerFormController implements Initializable {
         labelErrorBirthdate.setText((fields.contains("birthDate") ? errors.get("birthDate") : ""));
         labelErrorBaseSalary.setText((fields.contains("baseSalary") ? errors.get("baseSalary") : ""));
     }
-
+    
+     //Metodo que inicializa o combobox
     private void initializeComboBoxDepartment() {
         Callback<ListView<Department>, ListCell<Department>> factory = lv -> new ListCell<Department>() {
             @Override
